@@ -49,12 +49,8 @@ else:
     msg = 'This passenger is predicted to be: **survived**'
 
 ### Now add the prediction result to the Streamlit app
-
 prediction_state.markdown(msg)
-
-y_pred = tree_clf.predict(passenger)
 proba = tree_clf.predict_proba(passenger)
-prediction_state.markdown(msg)
 st.markdown(f'The survival probability: **{proba[0][1]:.2f}**')    
 
 # Add this after the above line of code
