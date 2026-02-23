@@ -14,6 +14,12 @@ tree_clf = joblib.load('model_dt.pickle')
 ### Streamnlit app code starts here
 
 st.title('Titanic Survival Prediction')
+
+# Add this after the above line of code
+with st.expander('Show sample of Titanic data'):
+    df = pd.read_csv('titanic.csv') # adjust filename if needed
+    st.dataframe(df.head(20))
+
 st.markdown('**Please provide passenger information**:')  # you can use markdown like this
 
 # this is how to dynamically change text
@@ -41,6 +47,7 @@ passenger = pd.DataFrame(
 )
 
 y_pred = tree_clf.predict(passenger)
+proba = tree_clf.predict_proba(passenger)
 
 # Preparing the message to be displayed based on the prediction
 if y_pred[0] == 0:
@@ -52,8 +59,3 @@ else:
 prediction_state.markdown(msg)
 proba = tree_clf.predict_proba(passenger)
 st.markdown(f'The survival probability: **{proba[0][1]:.2f}**')    
-
-# Add this after the above line of code
-with st.expander('Show sample of Titanic data'):
-    df = pd.read_csv('titanic.csv') # adjust filename if needed
-    st.dataframe(df.head(20))
