@@ -19,6 +19,15 @@ st.markdown('**Please provide passenger information**:')  # you can use markdown
 # this is how to dynamically change text
 prediction_state = st.markdown('calculating...')
 
+st.markdown('**Please provide passenger information**:')
+with st.form('inputs'):
+    sex = st.selectbox('Sex', ['female', 'male'])
+    age = int(st.number_input('Age:', min_value=0, max_value=100, value=20))
+    sib_sp = int(st.number_input('# of siblings / spouses aboard:', min_value=0, max_value=100, value=0))
+    pclass = st.selectbox('Ticket class (1 = 1st, 2 = 2nd, 3 =3rd)', [1, 2, 3])
+    fare = int(st.number_input('# of parents / children aboard:',min_value=0, max_value=1000, value=0))
+    submit = st.form_submit_button('Predict')
+
 ### Now the inference part starts here
 
 passenger = pd.DataFrame(
@@ -42,14 +51,6 @@ else:
 ### Now add the prediction result to the Streamlit app
 
 prediction_state.markdown(msg)
-st.markdown('**Please provide passenger information**:')
-with st.form('inputs'):
-    sex = st.selectbox('Sex', ['female', 'male'])
-    age = int(st.number_input('Age:', min_value=0, max_value=100, value=20))
-    sib_sp = int(st.number_input('# of siblings / spouses aboard:', min_value=0, max_value=100, value=0))
-    pclass = st.selectbox('Ticket class (1 = 1st, 2 = 2nd, 3 =3rd)', [1, 2, 3])
-    fare = int(st.number_input('# of parents / children aboard:',min_value=0, max_value=1000, value=0))
-    submit = st.form_submit_button('Predict')
 
 y_pred = tree_clf.predict(passenger)
 proba = tree_clf.predict_proba(passenger)
