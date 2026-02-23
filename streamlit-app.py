@@ -20,11 +20,6 @@ with st.expander('Show sample of Titanic data'):
     df = pd.read_csv('titanic.csv') # adjust filename if needed
     st.dataframe(df.head(20))
 
-st.markdown('**Please provide passenger information**:')  # you can use markdown like this
-
-# this is how to dynamically change text
-prediction_state = st.markdown('calculating...')
-
 st.markdown('**Please provide passenger information**:')
 with st.form('inputs'):
     sex = st.selectbox('Sex', ['female', 'male'])
@@ -45,6 +40,9 @@ passenger = pd.DataFrame(
         'Fare': [fare]
     }
 )
+
+# this is how to dynamically change text
+prediction_state = st.markdown('calculating...')
 
 y_pred = tree_clf.predict(passenger)
 proba = tree_clf.predict_proba(passenger)
