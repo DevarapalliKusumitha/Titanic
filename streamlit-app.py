@@ -16,13 +16,6 @@ tree_clf = joblib.load('model_dt.pickle')
 st.title('Titanic Survival Prediction')
 st.markdown('**Please provide passenger information**:')  # you can use markdown like this
 
-# get inputs
-sex = st.selectbox('Sex', ['female', 'male'])
-age = int(st.number_input('Age:', min_value=0, max_value=100, value=20))
-sib_sp = int(st.number_input('# of siblings / spouses aboard:', min_value=0, max_value=100, value=0))
-pclass = st.selectbox('Ticket class (1 = 1st, 2 = 2nd, 3 = 3rd)', [1, 2, 3])
-fare = int(st.number_input('# of parents / children aboard:', min_value=0, max_value=1000, value=0))
-
 # this is how to dynamically change text
 prediction_state = st.markdown('calculating...')
 
